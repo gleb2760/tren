@@ -7,12 +7,8 @@ use Illuminate\Http\Request;
 
 class BronController extends Controller
 {
-    public function index(Request $request){
-        $query = Bron::with('route');
-        if ($request->filled('route')){
-            $query->where("route_id", "=", $request->get("route"));
-        }
-        $posts = $query->get();
+    public function index(Request $request, Bron $bron){
+        $posts = $bron->bronWithFillter($request);
         return $posts;
     }
 
